@@ -63,8 +63,8 @@ def _pil_word_wrap(
 
 
 def generate_caption(
-        source_image_path: str,
-        output_image_path: str,
+        image_path: str,
+        output_path: str,
         text: str,
         font_path: str,
         initial_font_size: int = 1000,
@@ -73,7 +73,7 @@ def generate_caption(
         to_hd: bool = False,
         blur: bool = False
 ):
-    pil_image = Image.open(source_image_path)
+    pil_image = Image.open(image_path)
     if to_hd:
         pil_image = pil_image.resize(_hd_size)
     width, height = pil_image.size
@@ -124,4 +124,4 @@ def generate_caption(
         align="center",
         fill="white"
     )
-    pil_image.save(output_image_path)
+    pil_image.save(output_path)
