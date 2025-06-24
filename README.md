@@ -1,4 +1,4 @@
-# Caption Forge
+# caption-forge
 
 Automatically overlay perfectly fitted text on image
 
@@ -31,4 +31,4 @@ pip install -e .
 ```
 
 ## 📜 License
-Caption Forge is licensed under the **[MIT license](https://opensource.org/license/mit)**.
+caption-forge is licensed under the **[MIT license](https://opensource.org/license/mit)**.
