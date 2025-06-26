@@ -136,7 +136,7 @@ def generate_caption_image(
     text_width = bbox[2] - bbox[0]
     text_height = bbox[3] - bbox[1]
     x = (width - text_width) / 2
-    y = (height - text_height) / 2
+    y = (height - text_height) / 2 - (spacing / 2)
 
     draw.multiline_text(
         xy=(x, y),
