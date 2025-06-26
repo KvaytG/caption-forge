@@ -8,6 +8,10 @@ version = "1.1.0"
 description = "Automatically overlay perfectly fitted text on image"
 readme = "README.md"
 requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.2.6",
+    "pillow>=11.2.1"
+]
 
 [project.optional-dependencies]
 dev = ["pytest"]

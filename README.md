@@ -19,16 +19,8 @@ generate_caption_image(
 ```
 
 ## ⚙️ Installation
-1. Clone the repository
 ```bash
-git clone https://github.com/KvaytG/caption-forge.git
-cd caption-forge
-```
-2. Create a virtual environment and install dependencies
-```bash
-python -m venv venv
-.\venv\Scripts\activate  # Windows
-pip install -e .
+pip install git+https://github.com/KvaytG/caption-forge.git
 ```
 
 ## 📜 License
