@@ -82,7 +82,6 @@ def _pil_word_wrap(
             font_size -= 1
 
     if font_size == 1:
-        # font = ImageFont.truetype(font_path, 1)
         wrapped_text_try = '\n'.join(wrap(text, roi_width // 10, break_long_words=False))
         mutable_message = wrapped_text_try
 
