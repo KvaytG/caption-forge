@@ -12,8 +12,7 @@ from captionforge import generate_caption_image
 generate_caption_image(
     pil_image=Image.open("input.png"),
     text="Example Text",
-    font_path="OpenSans-Regular.ttf",
-    to_hd=True,
+    font_path="example-font.ttf",
     blur=True
 ).save("output.png")
 ```
@@ -25,3 +24,5 @@ pip install git+https://github.com/KvaytG/caption-forge.git
 
 ## 📜 License
 caption-forge is licensed under the **[MIT license](https://opensource.org/license/mit)**.
+
+This project uses open-source components. For license details see [pyproject.toml](pyproject.toml) and dependencies' official websites.

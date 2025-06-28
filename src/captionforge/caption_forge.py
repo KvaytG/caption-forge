@@ -96,11 +96,7 @@ def generate_caption_image(
         initial_font_size: int = 100,
         horizontal_margin_ratio: float = 0.2,
         vertical_margin_ratio: float = 0.1,
-        to_hd: bool = False,
         blur: bool = False) -> Image:
-    if to_hd:
-        pil_image = pil_image.resize(_hd_size)
-
     width, height = pil_image.size
 
     if blur:
