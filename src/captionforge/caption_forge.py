@@ -6,8 +6,6 @@ from typing import Tuple, Optional
 import random
 from .internal.text_color import get_text_color
 
-_hd_size = (1920, 1080)
-
 
 def _calculate_font_spacing(font: FreeTypeFont, coefficient: float = 0.5) -> int:
     ascent, descent = font.getmetrics()
