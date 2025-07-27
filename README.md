@@ -1,5 +1,7 @@
 # caption-forge
 
+![Python 3.10](https://img.shields.io/badge/Python-3.10-blue?logo=python) ![MIT License](https://img.shields.io/badge/License-MIT-green)
+
 Automatically overlay perfectly fitted text on image
 
 ## 📚 Usage
