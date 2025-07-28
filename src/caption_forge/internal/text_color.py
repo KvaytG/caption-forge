@@ -1,9 +1,8 @@
 import numpy as np
 from PIL.Image import Image
-from typing import Tuple
 
 
-def _get_average_color(pil_image: Image) -> Tuple[int, int, int]:
+def _get_average_color(pil_image: Image) -> tuple[int, int, int]:
     if pil_image.width == 0 or pil_image.height == 0:
         return 0, 0, 0
     image = pil_image.convert('RGB')
@@ -12,7 +11,7 @@ def _get_average_color(pil_image: Image) -> Tuple[int, int, int]:
     return tuple(np.round(avg_color).astype(int))  # type: ignore[return-value]
 
 
-def _get_contrast_color(avg_color: Tuple[int, int, int]) -> Tuple[int, int, int]:
+def _get_contrast_color(avg_color: tuple[int, int, int]) -> tuple[int, int, int]:
     color_array = np.array(avg_color, dtype=np.float32)
     contrast_color = 255 - color_array
     mask: np.ndarray = contrast_color < 128
@@ -21,6 +20,6 @@ def _get_contrast_color(avg_color: Tuple[int, int, int]) -> Tuple[int, int, int]
     return tuple(contrast_color.astype(int))  # type: ignore[return-value]
 
 
-def get_text_color(pil_image: Image) -> Tuple[int, int, int]:
+def get_text_color(pil_image: Image) -> tuple[int, int, int]:
     """ INTERNAL FUNCTION! """
     return _get_contrast_color(_get_average_color(pil_image))

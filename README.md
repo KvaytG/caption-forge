@@ -8,7 +8,7 @@ Automatically overlay perfectly fitted text on image
 
 ```python
 from PIL import Image
-from captionforge import generate_caption_image
+from caption_forge import generate_caption_image
 
 # Add text to image
 generate_caption_image(
