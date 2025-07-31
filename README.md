@@ -25,6 +25,6 @@ pip install git+https://github.com/KvaytG/caption-forge.git
 ```
 
 ## 📜 License
-caption-forge is licensed under the **[MIT license](https://opensource.org/license/mit)**.
+Licensed under the **[MIT](LICENSE.txt)** license.
 
 This project uses open-source components. For license details see **[pyproject.toml](pyproject.toml)** and dependencies' official websites.
