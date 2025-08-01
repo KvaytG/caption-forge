@@ -16,26 +16,26 @@ image = Image.open("image.jpg")
 # Generate text with default settings
 result = generate_caption_image(
     pil_image=image,
-    text="Привет, мир! Это пример текста в манге.",
-    font_path="fonts/manga_font.ttf"
+    text="Example Text",
+    font_path="example-font.ttf"
 )
 result.save("output_default.jpg")
 
 # Advanced Customization
 result_advanced = generate_caption_image(
     pil_image=image,
-    text="Это продвинутый пример с настройками",
-    font_path="fonts/bold_font.ttf",
+    text="Example Text",
+    font_path="example-font.ttf",
     text_color=(30, 30, 30),
     initial_font_size=80,
-    horizontal_margin_ratio=0.15,
+    horizontal_margin_ratio=0.2,
     vertical_margin_ratio=0.1,
     blur=True,
-    blur_radius=40,
+    blur_radius=50,
     outline_color=(255, 255, 255),
     outline_width=2,
     align="left",
-    line_spacing_coefficient=0.7
+    line_spacing_coefficient=0.5
 )
 result_advanced.save("output_advanced.jpg")
 ```
