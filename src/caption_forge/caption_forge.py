@@ -1,5 +1,5 @@
 from textwrap import wrap
-from PIL import ImageDraw, ImageFont, ImageFilter
+from PIL import ImageDraw, ImageFont, ImageFilter, Image
 from PIL.Image import Image
 from PIL.ImageFont import FreeTypeFont
 import random
@@ -12,14 +12,14 @@ def _calculate_font_spacing(font: FreeTypeFont, coefficient: float = 0.5) -> int
 
 
 def _pil_word_wrap(
-    pil_image: Image,
-    xy_top_left: tuple[int, int],
-    font_path: str,
-    init_font_size: int,
-    text: str,
-    roi_width: int,
-    roi_height: int,
-    align: str
+        pil_image: Image,
+        xy_top_left: tuple[int, int],
+        font_path: str,
+        init_font_size: int,
+        text: str,
+        roi_width: int,
+        roi_height: int,
+        align: str
 ) -> tuple[str, int]:
     if not text.strip():
         return text, init_font_size
@@ -64,26 +64,30 @@ def _pil_word_wrap(
 
 
 def generate_caption_image(
-    pil_image: Image,
-    text: str,
-    font_path: str,
-    text_color: tuple[int, int, int] | None = None,
-    initial_font_size: int = 100,
-    horizontal_margin_ratio: float = 0.2,
-    vertical_margin_ratio: float = 0.1,
-    blur: bool = False
+        pil_image: Image,
+        text: str,
+        font_path: str,
+        text_color: tuple[int, int, int] | None = None,
+        initial_font_size: int = 100,
+        horizontal_margin_ratio: float = 0.2,
+        vertical_margin_ratio: float = 0.1,
+        blur: bool = False,
+        blur_radius: int = 50,
+        outline_color: tuple[int, int, int] | None = None,
+        outline_width: int = 1,
+        align: str = 'center',
+        line_spacing_coefficient: float = 0.5,
+        auto_outline: bool = True
 ) -> Image:
     width, height = pil_image.size
-
     if blur:
-        pil_image = pil_image.filter(ImageFilter.GaussianBlur(50))
-
+        pil_image = pil_image.filter(ImageFilter.GaussianBlur(blur_radius))
     max_width = int(width * (1 - horizontal_margin_ratio))
     max_height = int(height * (1 - vertical_margin_ratio))
-
     if text_color is None:
         text_color = get_text_color(pil_image)
-
+    if auto_outline and outline_color is None:
+        outline_color = (255 - text_color[0], 255 - text_color[1], 255 - text_color[2])
     wrapped_text, font_size = _pil_word_wrap(
         pil_image,
         (0, 0),
@@ -92,17 +96,41 @@ def generate_caption_image(
         text,
         max_width,
         max_height,
-        align='center'
+        align=align
     )
-
     font = ImageFont.truetype(font_path, font_size)
     draw = ImageDraw.Draw(pil_image)
-    spacing = _calculate_font_spacing(font)
-    bbox = draw.multiline_textbbox((0, 0), wrapped_text, font=font, spacing=spacing, align="center")
+    spacing = _calculate_font_spacing(font, line_spacing_coefficient)
+    bbox = draw.multiline_textbbox((0, 0), wrapped_text, font=font, spacing=spacing, align=align)
     text_w, text_h = bbox[2] - bbox[0], bbox[3] - bbox[1]
-
-    x = (width - text_w) / 2
+    if align == 'left':
+        x = width * horizontal_margin_ratio / 2
+    elif align == 'right':
+        x = width - text_w - (width * horizontal_margin_ratio / 2)
+    else:
+        x = (width - text_w) / 2
     y = (height - text_h) / 2 - spacing / 2
-
-    draw.multiline_text((x, y), wrapped_text, font=font, spacing=spacing, align="center", fill=text_color)
+    if outline_width > 0 and outline_color:
+        directions = [
+            (-outline_width, -outline_width), (-outline_width, 0), (-outline_width, outline_width),
+            (0, -outline_width), (0, outline_width),
+            (outline_width, -outline_width), (outline_width, 0), (outline_width, outline_width)
+        ]
+        for dx, dy in directions:
+            draw.multiline_text(
+                (x + dx, y + dy),
+                wrapped_text,
+                font=font,
+                spacing=spacing,
+                align=align,
+                fill=outline_color
+            )
+    draw.multiline_text(
+        (x, y),
+        wrapped_text,
+        font=font,
+        spacing=spacing,
+        align=align,
+        fill=text_color
+    )
     return pil_image
