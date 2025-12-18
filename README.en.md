@@ -23,12 +23,12 @@ result = generate_caption_image(
 result.save("output.jpg")
 ```
 
-## ⚙️ Installation
+## 📥 Installation
 ```bash
 pip install git+https://github.com/KvaytG/caption-forge.git
 ```
 
-## 📜 License
+## 📝 License
 Licensed under the **[MIT](LICENSE.txt)** license.
 
 This project uses open-source components. For license details see **[pyproject.toml](pyproject.toml)** and dependencies' official websites.
