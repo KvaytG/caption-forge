@@ -6,5 +6,5 @@
 Automatically overlay perfectly fitted text on image.
 
 ## Languages
-- [![US](https://kvaytg.ru/common/flags/us-24x16.webp) English](README.en.md)
-- [![RU](https://kvaytg.ru/common/flags/ru-24x16.webp) Русский](README.ru.md)
+- [![US](https://kvaytg.ru/common/flags/us-21x16.svg) English](README.en.md)
+- [![RU](https://kvaytg.ru/common/flags/ru-21x16.svg) Русский](README.ru.md)
